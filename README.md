@@ -7,18 +7,17 @@
 
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.githubusercontent.com//jquery-responsive-carousel/master/dist/jquery.responsive-carousel.min.js
-[max]: https://raw.githubusercontent.com//jquery-responsive-carousel/master/dist/jquery.responsive-carousel.js
+[min]: https://github.com/deBijenkorf/responsive-carousel/tree/master/dist/jquery.responsive-carousel.min.js
+[max]: https://github.com/deBijenkorf/responsive-carousel/tree/master/dist/jquery.responsive-carousel.js
 
 In your web page:
 
 ```html
 <script src="jquery.js"></script>
+<script src="modernizr.js"></script>
 <script src="dist/responsive-carousel.min.js"></script>
 <script>
-  jQuery(function ($) {
-    $.awesome(); // "awesome"
-  });
+	jQuery('[data-dbk-carousel]').carousel();
 </script>
 ```
 
