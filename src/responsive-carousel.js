@@ -1,19 +1,19 @@
 var DBK = window.DBK || {};
 
-DBK.render = (function ( window, document ) {
+DBK.render = (function ( domPrefixes, window, document ) {
 
 	// avoid re-loading same library twice
 	if (typeof(DBK.render) == 'object' && typeof(DBK.render.LOADED) != 'undefined') {
 		return; 
 	}
 
-	var vendors  = ['ms', 'moz', 'webkit', 'o'];
+	var vendors = domPrefixes;
 
-	// Move this to global animation utility file
 	/**
 	 * Description
-	 * @method publicGetTransformPropertyName
-	 * @return Literal
+	 * @method publicGetVendorPropertyName
+	 * @param {} property
+	 * @return _property
 	 */
 	var publicGetVendorPropertyName = function ( property ) {
 
@@ -37,7 +37,7 @@ DBK.render = (function ( window, document ) {
 		'LOADED' : true
 	};
 
-})( window, document );
+})( window.Modernizr._domPrefixes, window, document );
 
 // the semi-colon before the function invocation is a safety
 // net against concatenated scripts and/or other plugins
@@ -174,7 +174,7 @@ DBK.render = (function ( window, document ) {
 
 			// Calculate list items that remains after all full cycles
 			this.deltaLiCount = this.liCount % this.maxLiItems;
-			this.deltaEvent   = this.deltaLiCount == 0 ? false : true;
+			this.deltaEvent   = this.deltaLiCount === 0 ? false : true;
 
 			// Current cycle
 			// Updates after every full cycle animation
@@ -309,7 +309,7 @@ DBK.render = (function ( window, document ) {
 			}
 
 			// Disable previous button on start
-			if ( this.xPosition == 0 ) {
+			if ( this.xPosition === 0 ) {
 				this.$ctrlBtnPrev.addClass('disabled');
 			}
 
@@ -587,6 +587,12 @@ DBK.render = (function ( window, document ) {
 			this.updateCtrlStatus();
 		},
 
+		/**
+		 * Description
+		 * @method transitionend
+		 * @param {} event
+		 * @return 
+		 */
 		transitionend : function ( event ) {
 
 			event.preventDefault();
@@ -653,7 +659,7 @@ DBK.render = (function ( window, document ) {
 			this.toggleDelayClass(event.type);
 			this.getControlProperties('previous');
 
-			if ( this.xPosition == 0) {
+			if ( this.xPosition === 0) {
 				return;
 			}
 
