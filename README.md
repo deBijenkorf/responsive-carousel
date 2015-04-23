@@ -1,7 +1,5 @@
 # Responsive carousel
 
-[![de Bijenkorf](http://cdn.debijenkorf.nl/INTERSHOP/static/WFS/dbk-shop-Site/-/-/nl_NL/images/logo.png) ](http://www.debijenkorf.nl/)
-
 > A jQuery plugin for responsive carousels that work with touch and mouse events
 
 ## Getting Started
@@ -18,7 +16,7 @@ In your web page:
 <script src="modernizr.js"></script>
 <script src="dist/responsive-carousel.min.js"></script>
 <script>
-	jQuery('[data-dbk-carousel]').carousel();
+	_$('[data-dbk-carousel]').carousel();
 </script>
 ```
 
@@ -33,3 +31,5 @@ _(Nothing yet)_
 ## License
 Copyright (c) 2015 de Bijenkorf.
 Licensed under the MIT, GPL licenses.
+
+[![de Bijenkorf](http://cdn.debijenkorf.nl/INTERSHOP/static/WFS/dbk-shop-Site/-/-/nl_NL/images/logo.png) ](http://www.debijenkorf.nl/)
