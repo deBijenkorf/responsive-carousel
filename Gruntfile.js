@@ -15,7 +15,8 @@ module.exports = function (grunt) {
 				'<%= pkg.homepage ? "* " + pkg.homepage + "\\n " : "" %>' +
 				'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.company %> \n ' +
 				'* Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> \n ' + 
-				'*/',
+				'*/\n' +
+				'\n\n' ,
 		// Task configuration.
 		clean: {
 			files: ['dist']
@@ -94,7 +95,7 @@ module.exports = function (grunt) {
 	});
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'connect', 'qunit', 'clean', 'concat', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'connect', 'clean', 'concat', 'uglify']); // Removed (, 'qunit' ) after connect
 	grunt.registerTask('server', function () {
 		grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
 		grunt.task.run(['serve']);
