@@ -1,28 +1,331 @@
 <!doctype html>
-  <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Responsive carousel Test Suite</title>
-    <!-- Load local jQuery. -->
-    <script src="../bower_components/jquery/jquery.js"></script>
-    <script src="../bower_components/modernizr/modernizr.js"></script>
-    <!-- Load local QUnit. -->
-    <link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css" media="screen">
-    <script src="../bower_components/qunit/qunit/qunit.js"></script>
-    <!-- Load local lib and tests. -->
-    <script src="../src/responsive-carousel.js"></script>
-    <script src="responsive-carousel_test.js"></script>
-    <!-- Removing access to jQuery and $. But it'll still be available as _$, if
-         you REALLY want to mess around with jQuery in the console. REMEMBER WE
-         ARE TESTING A PLUGIN HERE, THIS HELPS ENSURE BEST PRACTICES. REALLY. -->
-    <script>window._$ = jQuery.noConflict(true);</script>
-  </head>
-  <body>
-    <div id="qunit"></div>
-    <div id="qunit-fixture">
-      <span>lame test markup</span>
-      <span>normal test markup</span>
-      <span>awesome test markup</span>
-    </div>
-  </body>
+	<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Responsive carousel Test Suite</title>
+		<!-- Load local jQuery. -->
+		<script src="../bower_components/jquery/jquery.js"></script>
+		<script src="../bower_components/modernizr/modernizr.js"></script>
+		<!-- Load local QUnit. -->
+		<link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css" media="screen">
+		<script src="../bower_components/qunit/qunit/qunit.js"></script>
+
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" media="screen">
+		<!-- Load local lib and tests. -->
+		<script src="../src/responsive-carousel.js"></script>
+		<script src="responsive-carousel_test.js"></script>
+		<!-- Removing access to jQuery and $. But it'll still be available as _$, if
+				 you REALLY want to mess around with jQuery in the console. REMEMBER WE
+				 ARE TESTING A PLUGIN HERE, THIS HELPS ENSURE BEST PRACTICES. REALLY. -->
+		<script>window._$ = jQuery.noConflict(true);</script>
+	</head>
+	<body>
+		<style>
+
+.dbk-carousel {
+  position: relative;
+  width: 100%;
+  padding: 0 100px;
+  margin: 0 0 30px 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dbk-carousel-controls {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.dbk-carousel-control-btn {
+  position: relative;
+  width: 100px;
+  height: 100%;
+  color: #7d7d7d;
+  cursor: pointer;
+  opacity: 1;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.dbk-carousel-control-btn_previous {
+  float: left;
+}
+.dbk-carousel-control-btn_next {
+  float: right;
+}
+.dbk-carousel-control-btn .glyphicon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 3em;
+  margin-top: -1.5em;
+  text-align: center;
+  line-height: 3em;
+  font-size: 3em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.dbk-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.dbk-carousel-wrapper > ul {
+  position: relative;
+  float: left;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin-left: -10px;
+  margin-right: -10px;
+  list-style: none;
+  list-style-type: none;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transition: -webkit-transform 0.8s ease;
+  -moz-transition: -moz-transform 0.8s ease;
+  -o-transition: -o-transform 0.8s ease;
+  transition: transform 0.8s ease;
+}
+.dbk-carousel-wrapper > ul > li {
+  position: relative;
+  float: left;
+  height: auto;
+  text-align: center;
+  list-style-type: none;
+  width: 200px;
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+		</style>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">de Bijenkorf</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="http://debijenkorf.nl">de Bijenkorf</a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Responsive carousel</h1>
+				<p>A jQuery plugin for responsive carousels that work with touch and mouse events</p>
+				<p><a class="btn btn-primary btn-lg" href="https://github.com/deBijenkorf/responsive-carousel" role="button">Learn more &raquo;</a></p>
+			</div>
+		</div>
+
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="dbk-carousel" data-dbk-carousel >
+						<div class="dbk-carousel-controls">
+							<div class="dbk-carousel-control-btn dbk-carousel-control-btn_previous fade in disabled">
+								<span class="glyphicon glyphicon-menu-left"></span>
+							</div>
+							<div class="dbk-carousel-control-btn dbk-carousel-control-btn_next fade in">
+								<span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+						</div>
+						<div class="dbk-carousel-wrapper">
+							<ul>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="thumbnail">
+										<img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjQ1MzEyNSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjExcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjQyeDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+										<div class="caption">
+											<h3 id="thumbnail-label">Thumbnail label
+												<a class="anchorjs-link" href="#thumbnail-label">
+													<span class="anchorjs-icon"></span>
+												</a>
+											</h3>
+											<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+											<p>
+												<a href="#" class="btn btn-primary" role="button">Button</a> 
+												<a href="#" class="btn btn-default" role="button">Button</a>
+											</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+
+			<footer>
+				<p>&copy; de Bijenkorf 2015</p>
+			</footer>
+		</div> <!-- /container -->
+
+		<!--
+				<div id="qunit"></div>
+				<div id="qunit-fixture">
+					<span>lame test markup</span>
+					<span>normal test markup</span>
+					<span>awesome test markup</span>
+				</div>
+		 -->
+
+		<script>
+			_$('[data-dbk-carousel]').carousel();
+		</script>
+
+	</body>
 </html>

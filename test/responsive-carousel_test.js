@@ -1,12 +1,12 @@
 (function ($) {
-  module(':responsiveCarousel selector', {
+  module('carousel [data-dbk-carousel]', {
     setup: function () {
-      this.elems = $('#qunit-fixture').children();
+      this.elems = $('[data-dbk-carousel]').children();
     }
   });
 
-  test('is responsiveCarousel', function () {
+  test('is carousel', function () {
     expect(1);
-    deepEqual(this.elems.filter(':responsiveCarousel').get(), this.elems.last().get());
+    deepEqual(this.elems.children(), $('[data-dbk-carousel]').get(0));
   });
 }(jQuery));
